@@ -61,12 +61,15 @@ function knightTravails(chessOrigin, chessTarget) {
 
     if (currentSquare.x === target.x && currentSquare.y === target.y) {
       let pathMessage = '';
+      let chessPathMessage = '';
 
       currentSquare.path.forEach((move) => {
         pathMessage += `[${move[0]}, ${move[1]}] -> `;
+        chessPathMessage += `${String.fromCharCode(move[0] + 97)}${move[1] + 1} -> `;
       });
 
       pathMessage += `[${currentSquare.x}, ${currentSquare.y}]`;
+      chessPathMessage += `${String.fromCharCode(currentSquare.x + 97)}${currentSquare.y + 1}`;
 
       if (currentSquare.path.length === 0) {
         console.log(`Brother, you didn't move... Well, here's the "path":`);
@@ -76,7 +79,8 @@ function knightTravails(chessOrigin, chessTarget) {
         );
       }
 
-      console.log(pathMessage);
+      console.log('Coords path: ', pathMessage);
+      console.log('Chess path: ', chessPathMessage);
 
       return [...currentSquare.path, [currentSquare.x, currentSquare.y]];
     }
