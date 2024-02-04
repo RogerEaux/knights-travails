@@ -5,7 +5,7 @@ function translate(chessCords) {
 
   //  Convert any letter from the board to a valid x coordinate
   const coords = [
-    chessCords[0].toUpperCase().charCodeAt(0) - 65,
+    chessCords[0].toLowerCase().charCodeAt(0) - 97,
     chessCords[1] - 1,
   ];
 
