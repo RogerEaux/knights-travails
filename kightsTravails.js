@@ -31,7 +31,7 @@ function makeMoves(square) {
     const nextMove = createSquare(
       square.x + adjustment[0],
       square.y + adjustment[1],
-      square.path.push([square.x, square.y]),
+      [...square.path, [square.x, square.y]],
     );
 
     //  If it exists on the board, add it
@@ -60,14 +60,25 @@ function knightTravails(chessOrigin, chessTarget) {
     const currentSquare = moves.shift();
 
     if (currentSquare.x === target.x && currentSquare.y === target.y) {
-      console.log(
-        `You made it in ${currentSquare.path.length} moves! Here is the path:`,
-      );
+      let pathMessage = '';
+
       currentSquare.path.forEach((move) => {
-        console.log(move);
+        pathMessage += `[${move[0]}, ${move[1]}] -> `;
       });
 
-      return currentSquare.path;
+      pathMessage += `[${currentSquare.x}, ${currentSquare.y}]`;
+
+      if (currentSquare.path.length === 0) {
+        console.log(`Brother, you didn't move... Well, here's the "path":`);
+      } else {
+        console.log(
+          `You made it in ${currentSquare.path.length} moves! Here's the path:`,
+        );
+      }
+
+      console.log(pathMessage);
+
+      return [...currentSquare.path, [currentSquare.x, currentSquare.y]];
     }
 
     //  Enqueue each possible valid move
