@@ -9,7 +9,8 @@
   "name": "knights-travails",
   "description": "An algorithm that determines the shortest path a chess knight can take to get from a start to an end point",
   "version": "1.0.0",
-  "main": "kightsTravails.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
