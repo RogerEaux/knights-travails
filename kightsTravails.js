@@ -43,6 +43,30 @@ function makeMoves(square) {
   return nextMoves;
 }
 
+function logFoundMessage(square) {
+  let pathMessage = '';
+  let chessPathMessage = '';
+
+  square.path.forEach((move) => {
+    pathMessage += `[${move[0]}, ${move[1]}] -> `;
+    chessPathMessage += `${String.fromCharCode(move[0] + 97)}${move[1] + 1} -> `;
+  });
+
+  pathMessage += `[${square.x}, ${square.y}]`;
+  chessPathMessage += `${String.fromCharCode(square.x + 97)}${square.y + 1}`;
+
+  if (square.path.length === 0) {
+    console.log(`\nBrother, you didn't move... Well, here's the "path":`);
+  } else {
+    console.log(
+      `\nYou made it in ${square.path.length} moves! Here's the path:`,
+    );
+  }
+
+  console.log('Coords path: ', pathMessage);
+  console.log('Chess path: ', chessPathMessage);
+}
+
 function knightTravails(chessOrigin, chessTarget) {
   const translateOrigin = translate(chessOrigin);
   const translateTarget = translate(chessTarget);
@@ -59,28 +83,9 @@ function knightTravails(chessOrigin, chessTarget) {
   while (moves.length !== 0) {
     const currentSquare = moves.shift();
 
+    //  Check each of the possible valid moves in a level before the next
     if (currentSquare.x === target.x && currentSquare.y === target.y) {
-      let pathMessage = '';
-      let chessPathMessage = '';
-
-      currentSquare.path.forEach((move) => {
-        pathMessage += `[${move[0]}, ${move[1]}] -> `;
-        chessPathMessage += `${String.fromCharCode(move[0] + 97)}${move[1] + 1} -> `;
-      });
-
-      pathMessage += `[${currentSquare.x}, ${currentSquare.y}]`;
-      chessPathMessage += `${String.fromCharCode(currentSquare.x + 97)}${currentSquare.y + 1}`;
-
-      if (currentSquare.path.length === 0) {
-        console.log(`Brother, you didn't move... Well, here's the "path":`);
-      } else {
-        console.log(
-          `You made it in ${currentSquare.path.length} moves! Here's the path:`,
-        );
-      }
-
-      console.log('Coords path: ', pathMessage);
-      console.log('Chess path: ', chessPathMessage);
+      logFoundMessage(currentSquare);
 
       return [...currentSquare.path, [currentSquare.x, currentSquare.y]];
     }
